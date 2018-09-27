@@ -1,4 +1,4 @@
-package id.web.himawari;
+package id.web.himawari.util;
 
 import java.util.HashMap;
 import java.util.Locale;

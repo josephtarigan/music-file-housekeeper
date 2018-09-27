@@ -28,11 +28,11 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-import id.web.himawari.MimeType;
 import id.web.himawari.processor.impl.FlacProcessor;
 import id.web.himawari.processor.impl.Mp3Processor;
 import id.web.himawari.processor.impl.Mp4Processor;
 import id.web.himawari.util.MainPaneLog;
+import id.web.himawari.util.MimeType;
 import id.web.himawari.util.ProcessAudioFileUtil;
 
 /**
