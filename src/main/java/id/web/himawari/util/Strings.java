@@ -14,4 +14,12 @@ public class Strings {
 			return string.isEmpty();
 		}
 	}
+	
+	public static String stripIllegalCharacters (String input) {
+		if (!Strings.isNullOrEmpty(input)) {
+			return input.replaceAll("[/?%*:;|\"<>\\\\.]", "").trim();
+		} else {
+			return "";
+		}
+	}
 }

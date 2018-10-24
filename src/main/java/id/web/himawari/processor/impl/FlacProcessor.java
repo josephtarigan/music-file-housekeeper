@@ -33,8 +33,10 @@ public class FlacProcessor implements AudioFileProcessing {
 		try {
 			FlacTag flacTag = (FlacTag) flacFile.getTag();
 			VorbisCommentTag vorbisTag = flacTag.getVorbisCommentTag();
-			musicMetadata.setArtist(Strings.isNullOrEmpty(vorbisTag.getFirst(VorbisCommentFieldKey.ARTIST)) ? UNKNOWN_ARTIST : vorbisTag.getFirst(vorbisTag.getFirst(VorbisCommentFieldKey.ARTIST)).trim());
-			musicMetadata.setAlbumName(Strings.isNullOrEmpty(vorbisTag.getFirst(VorbisCommentFieldKey.ALBUM)) ? UNKNOWN_ALBUM : vorbisTag.getFirst(vorbisTag.getFirst(VorbisCommentFieldKey.ALBUM)).trim());
+			String artist = Strings.stripIllegalCharacters(Strings.isNullOrEmpty(vorbisTag.getFirst(VorbisCommentFieldKey.ALBUMARTIST)) ? vorbisTag.getFirst(VorbisCommentFieldKey.ARTIST) : vorbisTag.getFirst(VorbisCommentFieldKey.ALBUMARTIST));
+			String album = Strings.stripIllegalCharacters(vorbisTag.getFirst(VorbisCommentFieldKey.ALBUM));
+			musicMetadata.setArtist(Strings.isNullOrEmpty(artist) ? UNKNOWN_ARTIST : artist);
+			musicMetadata.setAlbumName(Strings.isNullOrEmpty(album) ? UNKNOWN_ALBUM : album);
 		} catch (Exception e) {
 			musicMetadata.setArtist(UNKNOWN_ARTIST);
 			musicMetadata.setAlbumName(UNKNOWN_ALBUM);

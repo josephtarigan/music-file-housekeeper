@@ -29,8 +29,10 @@ public class Mp3Processor implements AudioFileProcessing {
 		MusicMetadata musicMetadata= new MusicMetadata();		
 		try {
 			AbstractID3v2Tag v2Tag = mp3File.getID3v2Tag();
-			musicMetadata.setArtist(Strings.isNullOrEmpty(v2Tag.getFirst(ID3v24Frames.FRAME_ID_ARTIST)) ? UNKNOWN_ARTIST : v2Tag.getFirst(ID3v24Frames.FRAME_ID_ARTIST).trim());
-			musicMetadata.setAlbumName(Strings.isNullOrEmpty(v2Tag.getFirst(ID3v24Frames.FRAME_ID_ALBUM)) ? UNKNOWN_ALBUM : v2Tag.getFirst(ID3v24Frames.FRAME_ID_ALBUM).trim());
+			String artist = getArtist(v2Tag);
+			String album = Strings.stripIllegalCharacters(v2Tag.getFirst(ID3v24Frames.FRAME_ID_ALBUM));
+			musicMetadata.setArtist(Strings.isNullOrEmpty(artist) ? UNKNOWN_ARTIST : artist);
+			musicMetadata.setAlbumName(Strings.isNullOrEmpty(album) ? UNKNOWN_ALBUM : album);
 		} catch (Exception e) {
 			musicMetadata.setArtist(UNKNOWN_ARTIST);
 			musicMetadata.setAlbumName(UNKNOWN_ALBUM);
@@ -40,5 +42,18 @@ public class Mp3Processor implements AudioFileProcessing {
 		}
 	
 		return musicMetadata;
+	}
+	
+	private String getArtist (AbstractID3v2Tag v2Tag) {
+		String artist;
+		artist = v2Tag.getFirst(ID3v24Frames.FRAME_ID_ACCOMPANIMENT);
+		if (Strings.isNullOrEmpty(artist)) {
+			artist = v2Tag.getFirst(ID3v24Frames.FRAME_ID_ALBUM_ARTIST_SORT_ORDER_ITUNES);
+		}
+		if (Strings.isNullOrEmpty(artist)) {
+			artist = v2Tag.getFirst(ID3v24Frames.FRAME_ID_ARTIST);
+		}
+		
+		return artist;
 	}
 }

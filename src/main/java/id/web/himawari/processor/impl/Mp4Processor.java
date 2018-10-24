@@ -30,8 +30,10 @@ public class Mp4Processor implements AudioFileProcessing {
 		MusicMetadata musicMetadata= new MusicMetadata();
 		try {
 			Mp4Tag mp4Tag = (Mp4Tag) mp4File.getTag();
-			musicMetadata.setArtist(Strings.isNullOrEmpty(mp4Tag.getFirst(Mp4FieldKey.ARTIST)) ? UNKNOWN_ARTIST : mp4Tag.getFirst(Mp4FieldKey.ARTIST).trim());
-			musicMetadata.setAlbumName(Strings.isNullOrEmpty(mp4Tag.getFirst(Mp4FieldKey.ALBUM)) ? UNKNOWN_ALBUM : mp4Tag.getFirst(Mp4FieldKey.ALBUM).trim());
+			String artist = Strings.stripIllegalCharacters(Strings.isNullOrEmpty(mp4Tag.getFirst(Mp4FieldKey.ALBUM_ARTIST)) ? mp4Tag.getFirst(Mp4FieldKey.ARTIST): mp4Tag.getFirst(Mp4FieldKey.ALBUM_ARTIST));
+			String album = Strings.stripIllegalCharacters(mp4Tag.getFirst(Mp4FieldKey.ALBUM));
+			musicMetadata.setArtist(Strings.isNullOrEmpty(artist) ? UNKNOWN_ARTIST : artist);
+			musicMetadata.setAlbumName(Strings.isNullOrEmpty(album) ? UNKNOWN_ALBUM : album);
 		} catch (Exception e) {
 			musicMetadata.setArtist(UNKNOWN_ARTIST);
 			musicMetadata.setAlbumName(UNKNOWN_ALBUM);

@@ -17,7 +17,7 @@ import id.web.himawari.models.MusicMetadata;
  */
 public interface AudioFileProcessing {
 
-	static final String UNKNOWN_ARTIST = "Unkown Artist";
+	static final String UNKNOWN_ARTIST = "Unknown Artist";
 	static final String UNKNOWN_ALBUM = "Unknown Album";
 	
 	public abstract MusicMetadata getMetadata (File file, File folder) throws CannotReadException, IOException, TagException, ReadOnlyFileException, InvalidAudioFrameException;
