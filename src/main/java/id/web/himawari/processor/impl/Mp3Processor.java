@@ -29,8 +29,8 @@ public class Mp3Processor implements AudioFileProcessing {
 		MusicMetadata musicMetadata= new MusicMetadata();		
 		try {
 			AbstractID3v2Tag v2Tag = mp3File.getID3v2Tag();
-			String artist = getArtist(v2Tag);
-			String album = Strings.stripIllegalCharacters(v2Tag.getFirst(ID3v24Frames.FRAME_ID_ALBUM));
+			String artist = getArtist(v2Tag).trim();
+			String album = Strings.stripIllegalCharacters(v2Tag.getFirst(ID3v24Frames.FRAME_ID_ALBUM).trim());
 			musicMetadata.setArtist(Strings.isNullOrEmpty(artist) ? UNKNOWN_ARTIST : artist);
 			musicMetadata.setAlbumName(Strings.isNullOrEmpty(album) ? UNKNOWN_ALBUM : album);
 		} catch (Exception e) {
