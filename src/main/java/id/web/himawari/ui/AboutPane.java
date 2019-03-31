@@ -30,7 +30,7 @@ public class AboutPane extends JDialog {
 	public AboutPane(Frame owner) {
 		super(owner, true);
 		
-		iconImage = new ImageIcon(ClassLoader.getSystemClassLoader().getResource("images/Sunflower-icon.png"));
+		iconImage = new ImageIcon(getClass().getClassLoader().getResource("Sunflower-icon.png"));
 		iconImageLabel = new JLabel(iconImage);
 		iconImageLabel.setBorder(new EmptyBorder(15, 15, 15, 15));
 		aboutContentLayout = new BorderLayout();
@@ -49,7 +49,7 @@ public class AboutPane extends JDialog {
 		getContentPane().add(new JLabel("ほうとじつ - Music File Housekeeper", JLabel.CENTER), BorderLayout.CENTER);
 		getContentPane().add(aboutContentArea, BorderLayout.SOUTH);
 		this.setTitle("About");
-		this.setIconImage(new ImageIcon(ClassLoader.getSystemClassLoader().getResource("images/Sunflower-icon-24-24.png")).getImage());
+		this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("Sunflower-icon-24-24.png")).getImage());
 		this.setLocationRelativeTo(owner);
 		this.setResizable(false);
 		this.setSize(400, 300);

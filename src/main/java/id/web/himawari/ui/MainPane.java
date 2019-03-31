@@ -140,7 +140,7 @@ public class MainPane implements MainPaneLog {
 	}
 	
 	private void iconImage() {
-		iconImage = new ImageIcon(ClassLoader.getSystemClassLoader().getResource("images/Sunflower-icon-24-24.png"));
+		iconImage = new ImageIcon(getClass().getClassLoader().getResource("Sunflower-icon-24-24.png"));
 	}
 	
 	private void menuBar() {
